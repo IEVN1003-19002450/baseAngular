@@ -1,0 +1,89 @@
+<br>
+<br>
+<br>
+<div class="card border-primary mb-3" style="max-width: 100rem;">
+  <div style="text-align: center;">
+    <h1>Calculadora de resistencias</h1><br>
+    <!-- Formulario para la calculadora -->
+    <form [formGroup]="formulario" (ngSubmit)="calcular()">
+      <!-- Fila con las tres bandas -->
+      <div style="display: flex; justify-content: center; gap: 20px; align-items: center;">
+        <!-- Primera Banda -->
+        <div style="text-align: center;">
+          <label for="color1" style="display: block;">Primera Banda</label>
+          <select id="color1" formControlName="color1" class="form-select">
+            <option *ngFor="let color of colors" [value]="color">{{color}}</option>
+          </select>
+        </div>
+        <!-- Segunda Banda -->
+        <div style="text-align: center;">
+          <label for="color2" style="display: block;">Segunda Banda</label>
+          <select id="color2" formControlName="color2" class="form-select">
+            <option *ngFor="let color of colors" [value]="color">{{color}}</option>
+          </select>
+        </div>
+        <!-- Tercera Banda -->
+        <div style="text-align: center;">
+          <label for="color3" style="display: block;">Tercera Banda</label>
+          <select id="color3" formControlName="color3" class="form-select">
+            <option *ngFor="let color of colors" [value]="color">{{color}}</option>
+          </select>
+        </div>
+      </div>
+      <!-- Tolerancia -->
+      <div style="margin-top: 50px; display: flex; flex-direction: column; text-align: center; align-items: center;">
+        <p>Margen de Error</p>
+        <label>
+          <input type="radio" formControlName="tolerancia" class="form-check-input" value="oro"> Oro
+        </label>
+        <label>
+          <input type="radio" formControlName="tolerancia" class="form-check-input" value="plata"> Plata
+        </label>
+      </div>
+      <!-- Botón de Calcular -->
+      <button style="margin-top: 20px;" class="btn btn-outline-light" type="submit">Calcular</button>
+    </form>
+    <!-- Resultados -->
+    <div *ngIf="resultado">
+      <table border="1" style="margin-top: 20px; margin-left: auto; margin-right: auto; border-spacing: 10px; border-collapse: separate;">
+        <thead>
+          <tr>
+            <th>Tonalidad 1</th>
+            <th>Tonalidad 2</th>
+            <th>Tonalidad 3</th>
+            <th>Margen de Error</th>
+            <th>Valor</th>
+            <th>Valor Máximo</th>
+            <th>Valor Mínimo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <!-- Tonalidad 1 -->
+            <td [style.background]="getColorCode(formulario.get('color1')?.value)">
+              {{ formulario.get('color1')?.value }}
+            </td>
+            <!-- Tonalidad 2 -->
+            <td [style.background]="getColorCode(formulario.get('color2')?.value)">
+              {{ formulario.get('color2')?.value }}
+            </td>
+            <!-- Tonalidad 3 -->
+            <td [style.background]="getColorCode(formulario.get('color3')?.value)">
+              {{ formulario.get('color3')?.value }}
+            </td>
+            <!-- Margen de Error -->
+            <td [ngStyle]="{'background-color': getToleranceColor(), 'padding': '10px'}">
+              {{ formulario.get('tolerancia')?.value === 'oro' ? 'Dorado 5%' : 'Plata 10%' }}
+            </td>
+            <!-- Valor -->
+            <td [ngStyle]="{'padding': '10px'}">{{ valor }}</td>
+            <!-- Valor Máximo -->
+            <td [ngStyle]="{'padding': '10px'}">{{ valorMaximo }}</td>
+            <!-- Valor Mínimo -->
+            <td [ngStyle]="{'padding': '10px'}">{{ valorMinimo }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

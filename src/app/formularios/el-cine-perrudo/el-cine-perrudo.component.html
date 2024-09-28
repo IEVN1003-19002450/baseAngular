@@ -1,0 +1,46 @@
+<div class="container mt-5">
+  <div class="card">
+    <div class="card-header bg-primary text-white">
+      <h1>Bienvenido al cine más chido al chile</h1>
+    </div>
+    <div class="card-body">
+      
+      <form>
+        <div class="form-group">
+          <label for="name">Nombre:</label>
+          <input type="text" id="name" class="form-control" [(ngModel)]="nombre" name="nombre" required>
+        </div>
+
+        <div class="form-group">
+          <label for="compradores">Cantidad Compradores:</label>
+          <input type="number" id="compradores" class="form-control" [(ngModel)]="cantidadCompradores" name="cantidadCompradores" required>
+        </div>
+
+        <div class="form-group">
+          <label for="boletos">Cantidad de Boletos:</label>
+          <input type="number" id="boletos" class="form-control" [(ngModel)]="cantidadBoletos" name="cantidadBoletos" required>
+        </div>
+
+        <div class="form-group">
+          <label for="tarjetaCineco">Tarjeta Cineco:</label>
+          <div>
+            <input type="radio" id="tarjetaSi" [(ngModel)]="tarjetaCineco" name="tarjetaCineco" value="Si">
+            <label for="tarjetaSi">Sí</label>
+            <input type="radio" id="tarjetaNo" [(ngModel)]="tarjetaCineco" name="tarjetaCineco" value="No">
+            <label for="tarjetaNo">No</label>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="totalPagar">Valor a Pagar:</label>
+          <input type="text" id="totalPagar" class="form-control" [value]="valorPagar" readonly>
+        </div>
+      </form>
+    </div>
+
+    <div class="card-footer text-center">
+      <button class="btn btn-outline-light" (click)="procesar()">Procesar</button>
+      <button class="btn btn-outline-danger" (click)="salir()">Salir</button>
+    </div>
+  </div>
+</div>
